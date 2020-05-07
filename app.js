@@ -6,6 +6,7 @@ const helmet = require("helmet");
 
 const router = require("./src/router")
 
+const PORT = process.env.PORT || 5000
 var app = express();
 var server = http.createServer(app);
 
@@ -27,6 +28,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 router(app)
 
-server.listen("8080", "localhost", ()=> {
+server.listen(PORT, ()=> {
     console.log("Server listening on 8080...")
 })
