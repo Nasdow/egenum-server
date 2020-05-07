@@ -1,10 +1,12 @@
 {
   "name": "egenum-server",
   "version": "0.1.0",
-  "description": "NodeJS serveur pour l'application Egenum",
-  "main": "index.js",
+  "description": "Serveur NodeJS pour l'application Egenum",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "watch": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/Nasdow/egenum-server/issues"
   },
-  "homepage": "https://github.com/Nasdow/egenum-server#readme"
+  "homepage": "https://github.com/Nasdow/egenum-server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
 }
