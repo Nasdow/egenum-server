@@ -1,0 +1,19 @@
+{
+  "name": "egenum-server",
+  "version": "0.1.0",
+  "description": "NodeJS serveur pour l'application Egenum",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nasdow/egenum-server.git"
+  },
+  "author": "Nasdow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nasdow/egenum-server/issues"
+  },
+  "homepage": "https://github.com/Nasdow/egenum-server#readme"
+}
