@@ -11,7 +11,7 @@
             <h1 class="main-title">Egenum</h1>
         </header>
 
-        <!-- <div class="root-container">
+        <div class="root-container">
             <div class="main-container">
                 <form action="/login" method="POST" autocomplete="on" enctype="application/x-www-form-urlencoded"
                     class="form-login">
@@ -23,15 +23,14 @@
                     <input class="submit-login" type="submit" value="Se connecter">
                 </form>
             </div>
-        </div> -->
+        </div>
+        <%if(Object.keys(data).length !== 0) { %>
+            <p>Username entered: <%= data.userName %></p>
+            <p>password: <%= data.password %></p>
+        <% } %>
 
         <footer class="footer">
-            <p>Footer</p>
+
         </footer>
-        <script>
-            if(!sessionStorage.getItem("egenum.user")) {
-                window.location.assign("/login")
-            }
-        </script>
     </body>
 </html>
