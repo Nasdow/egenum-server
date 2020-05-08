@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000
 var app = express();
 var server = http.createServer(app);
 
-const whiteList = ['http://localhost:8080', 'http://127.0.0.1:8080']
+const whiteList = ['http://localhost:8080', 'http://127.0.0.1:8080', 'https://egenum-admin.herokuapp.com']
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whiteList.indexOf(origin) !== -1) {
@@ -26,8 +26,11 @@ app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+
 router(app)
 
 server.listen(PORT, ()=> {
-    console.log("Server listening on 8080...")
+    console.log("Server listening on 8080...");
 })
