@@ -1,3 +1,6 @@
+/** FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;600&family=Ubuntu:wght@400;700&display=swap');
+
 /** COLORS */
 :root {
     --BABY_POWDER: #FDFFFC;
@@ -10,7 +13,9 @@
     --SLATE_GREY: #63768D;
 }
 
+/** STYLES */
 body {
+    margin: 0px;
     background-color: var(--BABY_POWDER);
     font-family: 'Palanquin Dark', sans-serif;
 }
@@ -25,8 +30,40 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100vw;
+    position: relative;
+    padding: 0px 10px;
+}
+.header-nav-container {
+    display: flex;
+    height: 100%;
+    justify-self: flex-end;
+}
+.header-nav {
+    display: flex;
+    height: 100%;
+    list-style-type: none;
+    padding: 0px 10px;
+}
+.header-nav-item {
+    padding: 0px 10px;
+    border-left: 1px solid var(--SLATE_GREY);
+    font-size: 0.8em;
+    font-weight: 200;
+    cursor: pointer;
+}
+.header-nav-item:hover {
+    background-color: var(--SLATE_GREY);
+    opacity: .7;
+    color: var(--BABY_POWDER);
+}
+.header-nav-link {
+    text-decoration: none;
+    color: var(--RICH_BLACK);
+}
+.header-nav-link:hover {
+    color: var(--BABY_POWDER);
 }
 .root-container {
     display: flex;
@@ -41,6 +78,9 @@ p {
 .main-title {
     color: var(--SLATE_GREY);
 }
+.main-title-link {
+    text-decoration: none;
+}
 .form-login {
     display: flex;
     flex-direction: column;
@@ -51,14 +91,29 @@ p {
 .title-login {
     align-self: center;
 }
-.label-login {
-    min-width: 80px;
+.input-login-row {
+    /* width: 50%; */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+.icons-login {
+    color: var(--YALE_BLUE);
+    width: 1em;
+    height: 1em;
+
 }
 .input-login {
+    outline: 0px;
     min-width: 100px;
-    border-radius: 6px;
     padding: 6px;
-    border: 1px solid var(--YALE_BLUE) ;
+    /* border: 1px solid var(--SLATE_GREY); */
+    border-width: 0 0 1px;
+    border-color: var(--SLATE_GREY);
+}
+.input-login:focus {
+    border-color: var(--YALE_BLUE);
 }
 .submit-login {
     min-width: 70px;
@@ -78,6 +133,7 @@ p {
 }
 .error {
     color: var(--SWEET_BROWN);
+    border-color: var(--SWEET_BROWN);
 }
 .footer {
     display: flex;

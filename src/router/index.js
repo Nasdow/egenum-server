@@ -1,4 +1,4 @@
-const controllers = require("../controller");
+const controller = require("../controller");
 const utils = require("../utils");
 
 module.exports = (app) => {
@@ -6,29 +6,28 @@ module.exports = (app) => {
     app.get("/", (req, res) => {
         res.render("index");
     })
-
+    /** Login */
     app.get("/login", (req, res) => {
         res.render("login", {
             data: {},
             errors: {}
         });
     })
-    /**Middlewares: check input validity, check auth with AWS */
-    app.post("/login", (req, res) => {
+    app.post("/login", controller.authenticate, (req, res) => {
         res.render("login", {
-            data: req.body,
-            errors: {
-                userName: {
-                    msg: "Le nom d'utilisateur est incorrect !"
-                },
-                password: {
-                    msg: "Le mot de passe est incorrect !"
-                }
-            }
+            data: req.user_data,
+            errors: req.user_errors
         })
     })
 
+    /** Visualisation des données */
+
+    /** Création des données */
+
     /**Post data */
 
-    /** */
+    /*********************/
+    /** SUPER ADMIN Only*/
+    // app.post("/createUser", controller.createUser, utils.handleErrors);
+    /*******************/
 }

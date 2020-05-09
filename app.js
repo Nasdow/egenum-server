@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000
 var app = express();
 var server = http.createServer(app);
 
-const whiteList = ['http://localhost:5000', 'http://127.0.0.1:5000', 'https://egenum-admin.herokuapp.com']
+const whiteList = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:5000', 'http://127.0.0.1:5000', 'https://egenum-admin.herokuapp.com']
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whiteList.indexOf(origin) !== -1) {

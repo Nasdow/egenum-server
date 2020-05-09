@@ -4,33 +4,41 @@
         <title>Egenum</title>
         <meta name="description" content="Egenum is ">
         <link rel="stylesheet" href="style.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;600&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header class="header">
-            <h1 class="main-title">Egenum</h1>
+        <header id="header" class="header">
+            <a class="main-title-link" href="/">
+                <h1 class="main-title">Egenum</h1>
+            </a>
+            <nav class="header-nav-container">
+                <ul class="header-nav">
+                    <li class="header-nav-item">
+                        <a class="header-nav-link" href="/">Ajouter un service</a>
+                    </li>
+                    <li class="header-nav-item">
+                        <a class="header-nav-link" href="/">Gérer les services</a>
+                    </li>
+                    <li class="header-nav-item">
+                        <a class="header-nav-link" href="/" onclick="logout()">Se déconnecter</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
 
-        <!-- <div class="root-container">
+        <div class="root-container">
             <div class="main-container">
-                <form action="/login" method="POST" autocomplete="on" enctype="application/x-www-form-urlencoded"
-                    class="form-login">
-                    <h4 class="title-login">Connectez-vous</h4>
-                    <label class="label-login">Nom d'utilisateur</label>
-                    <input class="input-login" id="userName" name="userName" type="text" required>
-                    <label class="label-login">Mot de passe</label>
-                    <input class="input-login" id="password" name="password" type="password" required>
-                    <input class="submit-login" type="submit" value="Se connecter">
-                </form>
+                <p></p>
             </div>
-        </div> -->
+        </div>
 
-        <footer class="footer">
-            <p>Footer</p>
-        </footer>
         <script>
-            if(!sessionStorage.getItem("egenum.user")) {
+            if(!sessionStorage.getItem("egenum.session")) {
                 window.location.assign("/login")
+            }
+
+            logout = function(){
+                sessionStorage.removeItem("egenum.session");
+                window.location.reload();
             }
         </script>
     </body>

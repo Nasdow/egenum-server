@@ -3,12 +3,14 @@
     <head>
         <title>Egenum</title>
         <meta name="description" content="Egenum is ">
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="./style.css" />
         <link href="https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;600&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
         <header class="header">
-            <h1 class="main-title">Egenum</h1>
+            <a class="main-title-link" href="/">
+                <h1 class="main-title">Egenum</h1>
+            </a>
         </header>
 
         <div class="root-container">
@@ -16,21 +18,53 @@
                 <form action="/login" method="POST" autocomplete="on" enctype="application/x-www-form-urlencoded"
                     class="form-login">
                     <h4 class="title-login">Connectez-vous</h4>
-                    <label class="label-login">Nom d'utilisateur</label>
-                    <input class="input-login" id="userName" name="userName" type="text" required>
-                    <label class="label-login">Mot de passe</label>
-                    <input class="input-login" id="password" name="password" type="password" required>
+                    <!-- /<div class="input-login-container"> -->
+                        <div class="input-login-row">
+                            <label><i id="username-icon" data-feather="user" class="icons-login"></i></label>
+                            <input class="input-login" id="username-input" name="userName" type="text" required placeholder="Nom d'utilisateur">
+                        </div>
+                        <div class="input-login-row">
+                            <label><i id="password-icon" data-feather="lock" class="icons-login"></i></label>
+                            <input class="input-login" id="password-input" name="password" type="password" required placeholder="Mot de passe">
+                        </div>
+                    <!-- </div> -->
                     <input class="submit-login" type="submit" value="Se connecter">
+                    <% if(Object.entries(errors).length !== 0) { %>
+                        <p class="error">Vos identifiants sont invalides</p>
+                    <%}%>
                 </form>
             </div>
         </div>
-        <%if(Object.keys(data).length !== 0) { %>
-            <p>Username entered: <%= data.userName %></p>
-            <p>password: <%= data.password %></p>
-        <% } %>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
+        </footer> -->
 
-        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+        <script>
+            <% if(errors.hasOwnProperty("userName")) { %>
+                var userIcon = document.getElementById("username-icon");
+                var userInput = document.getElementById("username-input");
+
+                userIcon.classList.add("error");
+                userInput.classList.add("error");
+            <%}%>
+
+            <% if(errors.hasOwnProperty("password")) { %>
+                var pwdIcon = document.getElementById("password-icon");
+                var pwdInput = document.getElementById("password-input");
+
+                pwdIcon.classList.add("error");
+                pwdInput.classList.add("error");
+            <%}%>
+
+            <% if(data.hasOwnProperty("id")) { %>
+                // console.log("Data", data.id)
+                window.sessionStorage.setItem("egenum.session", "<%= data.id %>" );
+                window.location.replace(window.location.origin);
+            <%}%>
+        </script>
     </body>
 </html>
