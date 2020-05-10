@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Egenum</title>
+        <link rel="icon" type="image/png" href="/images/favicon.ico">
+        <meta name="description" content="Egenum | Trouvez l'aide autours de vous">
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header id="header" class="header">
+            <a class="main-title-link" href="/">
+                <h1 class="main-title">Egenum</h1>
+            </a>
+            <div class="header-user-container">
+                <i class="header-user-icon" data-feather="user"></i>
+                <p id="userName" class="header-user-name"></p>
+                <ul class="header-logout">
+                    <li class="header-logout-item">
+                        <a href="/" onclick="logout()">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="root-container">
+            <div class="main-container flex-centered">
+                <div class="action-container">
+                    <div class="action-item">
+                        <i class="action-icon" data-feather="file-plus"></i>
+                        <a id="createLink" href="/create">
+                            <label class="action-label">
+                                Créer un service
+                            </label>
+                        </a>
+                    </div>
+                    <div class="action-item">
+                        <i class="action-icon" data-feather="edit"></i>
+                        <a id="manageLink">
+                            <label class="action-label">
+                                Gérer les services
+                            </label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <script>
+            feather.replace()
+        </script>
+        <script>
+            
+            var userName = "<%= userData.userName %>"
+            
+            var userNameTag = document.getElementById("userName")
+            var text = document.createTextNode("Salut " + userName)
+            userNameTag.appendChild(text)
+
+            var manageLinkTag = document.getElementById("manageLink")
+            manageLinkTag.href = "/manage"
+
+            logout = function(){
+                fetch("/logout").then(() => {
+                    window.location.reload()
+                })
+            }
+        </script>
+    </body>
+</html>

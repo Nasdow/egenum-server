@@ -13,9 +13,66 @@ AWS.config.update(awsConfig);
 const dbClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports = {
+    handleErrors: (error, req, res, next) => {
+        console.log("Error Handling : ", error)
+        if (res.headersSent) {
+            return next(error);
+        }
+        res.status(500).json({
+            message: "Une erreur serveur interne est survenue"
+        })
+    },
+    verifyCookie: (req, res, next) => {
+        const egenumCookie = req.cookies.egenum;
+        const egenumCookieValue =  egenumCookie === undefined ? { id: undefined } : JSON.parse(egenumCookie)
+
+        if(egenumCookieValue.id !== undefined) {
+            next();
+        }
+        else {
+            res.redirect("/login")
+        }
+    },
+    verifyUser: (req, res, next) => {
+        try {
+            const userID = JSON.parse(req.cookies.egenum).id
+            dbClient.get({
+                TableName: 'egenum-users',
+                Key: {
+                    id: userID
+                }
+            }, (error, data) => {
+                if(error) {
+                    console.log("Error while getting user in DB :", error);
+                    res.status(500).json({
+                        status: 500,
+                        statusStr: "Internal Server Error",
+                        msg: "Impossible de vérifier l'émetteur de la requête"
+                    })
+                }
+                else {
+                    if(data.Item) {
+                        next();
+                    }
+                    else {
+                        res.status(401).json({
+                            status: 401,
+                            statusStr: "Unauthorized",
+                            msg: "Vous devez être connecté pour effectuer cette opération"
+                        })
+                    }
+                }
+            })
+        } catch (error) {
+            console.log("Error while verifying user:", error);
+            res.status(500).json({
+                status: 500,
+                statusStr: "Internal Server Error",
+                msg: "Impossible de vérifier l'émetteur de la requête"
+            })
+        }
+    },
     authenticate: (req, res, next) => {
-        /**Authenticate with AWS */    
-        console.log("Body:", req.body);    
         try {
             dbClient.scan({
                 TableName: "egenum-users",
@@ -78,7 +135,7 @@ module.exports = {
                                     next();
                                 }
                                 else if (data.Count === 1) {
-                                    console.log("Authentifié")
+                                    // console.log("Authentifié")
                                     req.user_data = {
                                         id: data.Items[0].id,
                                         userName: data.Items[0].username
@@ -102,6 +159,62 @@ module.exports = {
             next();
         }
     },
+    createService: (req, res, next) => {
+        try {
+            
+        } catch (error) {
+            next();
+        }
+    },
+    getAllServices: (req, res, next) => {
+        try {
+            dbClient.scan({
+                TableName: 'egenum-services'
+            }, (error, data) => {
+                if(error) {
+                    console.log("Error while fetching services !")
+                    console.log("Error: ", error)
+                    req.service_data = {};
+                    req.service_error = {
+                        serveur: {
+                            msg: "Une erreur serveur interne est survenue"
+                        }
+                    };
+                    next();
+                }
+                else {
+                    if(data.Count === 0) {
+                        console.log("Aucun services trouvés")
+                        req.service_data = {};
+                        req.service_error = {
+                            service: {
+                                msg: "Aucun services"
+                            }
+                        };
+                        next();
+                    }
+                    else {
+                        console.log("Services récupérés")
+                        req.service_data = {
+                            count: data.Count,
+                            items: data.Items
+                        }
+                        req.service_error = {};
+                        next();
+                    }
+                }
+            })
+        } catch (error) {
+            console.log("Error: ", error)
+            req.service_data = {};
+            req.service_error = {
+                serveur: {
+                    msg: "Une erreur serveur interne est survenue"
+                }
+            };
+            next();
+        }
+    }
 
     /*********************/
     /**SUPER ADMIN Only */

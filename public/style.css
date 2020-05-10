@@ -11,6 +11,9 @@
     --MARIGOLD: #ECA400;
     --RUBINE_RED: #D81159;
     --SLATE_GREY: #63768D;
+    --FLAT_BLUE: #2C3E50;
+    --CLEAR_BLUE: #3498DB;
+    --BAD_RED: #E74C3C;
 }
 
 /** STYLES */
@@ -18,12 +21,23 @@ body {
     margin: 0px;
     background-color: var(--BABY_POWDER);
     font-family: 'Palanquin Dark', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    min-width: 320px;
+    min-height: 491px;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Ubuntu', sans-serif;
 }
 p {
     color: var(--RICH_BLACK);
+}
+
+.flex-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .header {
@@ -33,40 +47,52 @@ p {
     justify-content: space-between;
     width: 100vw;
     position: relative;
-    padding: 0px 10px;
 }
-.header-nav-container {
+.header-user-container {
     display: flex;
     height: 100%;
     justify-self: flex-end;
+    align-items: center;
+    min-width: 333px;
 }
-.header-nav {
+.header-user-icon {
+    width: 1.7em;
+    height: 1.7em;
+    color: var(--CLEAR_BLUE);
+}
+.header-user-name {
+    font-size: 1.1em;
+    font-weight: 400;
+    padding-left: 5px;
+}
+.header-logout {
     display: flex;
     height: 100%;
     list-style-type: none;
     padding: 0px 10px;
 }
-.header-nav-item {
+.header-logout-item {
     padding: 0px 10px;
-    border-left: 1px solid var(--SLATE_GREY);
-    font-size: 0.8em;
+    border-left: 1px solid var(--CLEAR_BLUE);
+    font-size: 1em;
     font-weight: 200;
     cursor: pointer;
 }
-.header-nav-item:hover {
-    background-color: var(--SLATE_GREY);
-    opacity: .7;
+.header-logout-item:hover {
+    background-color: var(--CLEAR_BLUE);
     color: var(--BABY_POWDER);
 }
-.header-nav-link {
+.header-logout-item a {
     text-decoration: none;
     color: var(--RICH_BLACK);
 }
-.header-nav-link:hover {
+.header-logout-item:hover a {
     color: var(--BABY_POWDER);
 }
+
 .root-container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -74,13 +100,19 @@ p {
 }
 .main-container {
     width: 50%;
+    height: 100%;
 }
 .main-title {
-    color: var(--SLATE_GREY);
+    color: var(--FLAT_BLUE);
+    font-size: 45px;
+    margin-block-start: 3px;
+    margin-block-end: 3px;
+    padding-left: 10px;
 }
 .main-title-link {
     text-decoration: none;
 }
+
 .form-login {
     display: flex;
     flex-direction: column;
@@ -108,7 +140,6 @@ p {
     outline: 0px;
     min-width: 100px;
     padding: 6px;
-    /* border: 1px solid var(--SLATE_GREY); */
     border-width: 0 0 1px;
     border-color: var(--SLATE_GREY);
 }
@@ -131,33 +162,46 @@ p {
     color: var(--BABY_POWDER);
     border: 1px solid var(--YALE_BLUE);
 }
+
 .error {
-    color: var(--SWEET_BROWN);
-    border-color: var(--SWEET_BROWN);
+    color: var(--BAD_RED);
+    border-color: var(--BAD_RED);
 }
-.footer {
+
+.action-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    margin-top: 25vh;
+    min-width: 200px;
 }
-
-.button {
-    border: 1px solid var(--RICH_BLACK);
-    border-radius: 3px;
-    width: 100px;
-    height: 30px;
-    display: block;
-    color: var(--RICH_BLACK);
-    background: linear-gradient(to right, var(--YALE_BLUE) 50%, var(--BABY_POWDER) 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: all .5s ease-out;
+.action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-  
-.button:hover {
-    background-position: left bottom;
-    border: 1px solid var(--YALE_BLUE);
+.action-icon {
+    width: 10vw;
+    height: 10vw;
+    color: var(--YALE_BLUE)
+}
+.action-label {
+    border: 1px solid var(--CLEAR_BLUE);
+    border-radius: 15px;
+    padding: 0px 10px;
+    color: var(--FLAT_BLUE);
+    transition: background-color .3s ease-out, color .3s ease-in;
+}
+.action-label:hover {
     color: var(--SNOW);
+    background-color: var(--CLEAR_BLUE);
 }
-  
+.action-item a {
+    text-decoration: none;
+    font-size: 3vh;
+    margin-top: 8px;
+}
