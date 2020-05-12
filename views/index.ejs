@@ -13,7 +13,7 @@
             </a>
             <div class="header-user-container">
                 <i class="header-user-icon" data-feather="user"></i>
-                <p id="userName" class="header-user-name"></p>
+                <p id="userName" class="header-user-name"><%= userData.userName %></p>
                 <ul class="header-logout">
                     <li class="header-logout-item">
                         <a href="/" onclick="logout()">Se déconnecter</a>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="action-item">
                         <i class="action-icon" data-feather="edit"></i>
-                        <a id="manageLink">
+                        <a id="manageLink" href="/manage">
                             <label class="action-label">
                                 Gérer les services
                             </label>
@@ -49,22 +49,6 @@
         <script>
             feather.replace()
         </script>
-        <script>
-            
-            var userName = "<%= userData.userName %>"
-            
-            var userNameTag = document.getElementById("userName")
-            var text = document.createTextNode("Salut " + userName)
-            userNameTag.appendChild(text)
-
-            var manageLinkTag = document.getElementById("manageLink")
-            manageLinkTag.href = "/manage"
-
-            logout = function(){
-                fetch("/logout").then(() => {
-                    window.location.reload()
-                })
-            }
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>

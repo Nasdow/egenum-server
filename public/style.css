@@ -21,16 +21,22 @@ body {
     margin: 0px;
     background-color: var(--BABY_POWDER);
     font-family: 'Palanquin Dark', sans-serif;
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw; */
+    /* height: 100vh; */
     min-width: 320px;
     min-height: 491px;
+    
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Ubuntu', sans-serif;
 }
 p {
     color: var(--RICH_BLACK);
+}
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    appearance: none;
+    margin: 0; 
 }
 
 .flex-centered {
@@ -47,6 +53,7 @@ p {
     justify-content: space-between;
     width: 100vw;
     position: relative;
+    overflow-x: hidden;
 }
 .header-user-container {
     display: flex;
@@ -96,9 +103,10 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    overflow: hidden;
 }
 .main-container {
+    display: flex;
     width: 50%;
     height: 100%;
 }
@@ -176,6 +184,7 @@ p {
     align-items: center;
     justify-content: space-around;
     margin-top: 25vh;
+    margin-bottom: 10px;
     min-width: 200px;
 }
 .action-item {
@@ -204,4 +213,61 @@ p {
     text-decoration: none;
     font-size: 3vh;
     margin-top: 8px;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 90%;
+}
+.service-form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 100%;
+}
+.service-form-group-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-block-start: 1em;
+    margin-block-end: 0.3em;
+}
+.service-form-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 20px;
+}
+.service-form-label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    font-weight: 200;
+    /* margin-right: 0.5em; */
+}
+.service-form input, .service-form select {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.service-form-text {
+    outline: 0px;
+    max-width: 150px;
+    padding: 0px 6px ;
+    border-width: 0 0 1px;
+    border-color: var(--SLATE_GREY);
+}
+.service-form-number {
+    width: 4em;
+    border: 1px solid var(--SLATE_GREY);
+    border-radius: 4px;
+    /* -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; */
+}
+.service-form-text:focus, .service-form-number:focus {
+    border-color: var(--YALE_BLUE);
 }

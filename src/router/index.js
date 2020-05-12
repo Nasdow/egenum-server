@@ -18,7 +18,7 @@ module.exports = (app) => {
     app.post("/login", controller.authenticate, (req, res) => {
         if(req.user_data.id !== undefined) {
             res.cookie("egenum", JSON.stringify(req.user_data), {
-                httpOnly: true,
+                httpOnly: false,
                 maxAge: 86400000
             })
             res.redirect("/");
@@ -41,13 +41,15 @@ module.exports = (app) => {
     })
 
     /** Création des données */
-    app.get("/create", (req, res) => {
+    app.get("/create", controller.verifyCookie, controller.verifyUser, (req, res) => {
         res.render("create", {
+            userData: req.cookies.egenum,
             result: undefined
         })
     })
     app.post("/create", controller.verifyCookie, controller.verifyUser, controller.createService, (req, res) => {
         res.render("create", {
+            userData: JSON.parse(req.cookies.egenum),
             result: req.service_result
         })
     })
