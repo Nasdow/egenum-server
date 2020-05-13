@@ -23,41 +23,45 @@
         <div class="root-container">
             <div class="main-container flex-centered">
                 <h2>Créez une nouvelle entrée</h2>
+                <% if(result !== undefined) { 
+                    if(result === true) { %>
+                    <h4 class="service-form-result-true">Créée avec succes</h4>
+                    <% } else { %>
+                    <h4 class="service-form-result-false">Erreur pendant la création</h4>
+                    <% }
+                } %>
 
                 <form id="create-form" class="service-form" method="POST" action="/create">
-
-                    <dvi class="service-form-item">
-                        <label class="service-form-label">Catégorie : </label>
-                        <select class="" name="">
-                            <option disabled selected>Catégorie</option>
-                            <option id="nourriture" value="NOURRITURE">Nourriture</option>
-                            <option id="nourriture" value="NOURRITURE">Vêtements</option>
-                            <option id="nourriture" value="NOURRITURE">Soin</option>
-                        </select>
-                    </dvi>
+                    <p class="service-form-group-title">Catégorie ------------------</p>
+                    <div class="service-form-item">
+                        <div class="service-form-item">
+                            <label class="service-form-label">Nourriture</label>
+                            <input type="checkbox" class="service-form-checkbox" name="categories[]" value="NOURRITURE">
+                        </div>
+                        <div class="service-form-item">
+                            <label class="service-form-label">Vêtements</label>
+                            <input type="checkbox" class="service-form-checkbox" name="categories[]" value="VETEMENTS">
+                        </div>
+                        <div class="service-form-item">
+                            <label class="service-form-label">Soins</label>
+                            <input type="checkbox" class="service-form-checkbox" name="categories[]" value="SOINS">
+                        </div>
+                    </div>
 
                     <p class="service-form-group-title">Entité ------------------</p>
                     <div class="service-form-group">
                         <div class="service-form-item">
                             <label class="service-form-label">Nom :</label>
-                            <input class="service-form-text" name="nom" type="text" >
-                        </div>
-                        <div class="service-form-item">
-                            <label class="service-form-label">Association :</label>
-                            <select>
-                                <option selected disabled>Associations</option>
-                                <option>Asso 1</option>
-                                <option>Asso 2</option>
-                                <option>Asso 3</option>
-                            </select>
+                            <input class="service-form-text" name="nom" type="text" required>
                         </div>
                     </div>
+                    
 
                     <p class="service-form-group-title">Contact ------------------</p>
                     <div class="service-form-group">
                         <div class="service-form-item">
                             <label class="service-form-label">Mail :</label>
-                            <input class="service-form-text" name="email" type="email" >
+                            <input class="service-form-text" name="email" type="email" pattern="">
                         </div>
                         <div class="service-form-item">
                             <label class="service-form-label">Téléphone :</label>
@@ -70,69 +74,69 @@
                     <div class="service-form-group">
                         <div class="service-form-item">
                             <label class="service-form-label">Numéro de voie :</label>
-                            <input class="service-form-number" name="" type="number" >
+                            <input class="service-form-number" name="numero" type="text" required>
                         </div>
                         <div class="service-form-item">
                             <label class="service-form-label">Voie :</label>
-                            <input class="service-form-text" name="" type="text" >
+                            <input class="service-form-text" name="voie" type="text" required>
                         </div>
                     </div>
 
                     <div class="service-form-group">
                         <div class="service-form-item">
                             <label class="service-form-label">Ville :</label>
-                            <input class="service-form-text" name="" type="text" >
+                            <input class="service-form-text" name="ville" type="text" required>
                         </div>
                         <div class="service-form-item">
                             <label class="service-form-label">Code Postal :</label>
-                            <input class="service-form-number" name="" type="text" minlength="5" maxlength="5" >
+                            <input class="service-form-number" name="codeP" type="text" pattern="[0-9]{5}" required>
                         </div>
                     </div>
                     <div class="service-form-group">
                         <div class="service-form-item">
                             <label class="service-form-label">Latitude :</label>
-                            <input class="service-form-number" name="" type="number" >
+                            <input class="service-form-number" name="latitude" type="text" required>
                         </div>
                         <div class="service-form-item">
                             <label>Longitude :</label>
-                            <input class="service-form-number" name="" type="number" >
+                            <input class="service-form-number" name="longitude" type="text" required>
                         </div>
                     </div>
 
                     <p class="service-form-group-title">Horaires ------------------</p>
                     <div class="service-form-item">
                         <label class="service-form-label">Lundi :</label>
-                        <input class="" name="" type="time" > : <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="lundi_open" name="lundi_hours[]" class=""  type="time" required> : <input id="lundi_close" name="lundi_hours[]" class=""  type="time" require> | <input id="lundi_fermeture" name="lundi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('lundi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Mardi :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="mardi_open" name="mardi_hours[]" class=""  type="time" required> : <input id="mardi_close" name="mardi_hours[]" class=""  type="time" required> | <input id="mardi_fermeture" name="mardi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('mardi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Mercredi :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="mercredi_open" name="mercredi_hours[]" class=""  type="time" required> : <input id="mercredi_close" name="mercredi_hours[]" class=""  type="time" required> | <input id="mercredi_fermeture" name="mercredi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('mercredi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Jeudi :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="jeudi_open" name="jeudi_hours[]" class=""  type="time" required> : <input id="jeudi_close" name="jeudi_hours[]" class=""  type="time" required> | <input id="jeudi_fermeture" name="jeudi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('jeudi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Vendredi :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="vendredi_open" name="vendredi_hours[]" class=""  type="time" required> : <input id="vendredi_close" name="vendredi_hours[]" class=""  type="time" required> | <input id="vendredi_fermeture" name="vendredi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('vendredi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Samedi :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="samedi_open" name="samedi_hours[]" class=""  type="time" required> : <input id="samedi_close" name="samedi_hours[]" class=""  type="time" required> | <input id="samedi_fermeture" name="samedi_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('samedi')"> Fermé
                     </div>
                     <div class="service-form-item">
                         <label class="service-form-label">Dimanche :</label>
-                        <input class="" name="" type="time" > à <input class="" name="" type="time" > | <input class="" name="" type="checkbox" > Fermé
+                        <input id="dimanche_open" name="dimanche_hours[]" class=""  type="time" required> : <input id="dimanche_close" name="dimanche_hours[]" class=""  type="time" required> | <input id="dimanche_fermeture" name="dimanche_isClosed" class="service-form-checkbox" type="checkbox" value="true" onclick="disableHours('dimanche')"> Fermé
                     </div>
                     <!-- </div> -->
                     <p class="service-form-group-title">Lien ------------------</p>
                     <div class="service-form-item">
                         <label class="service-form-label">Site web :</label>
-                        <input class="service-form-text" name="" type="url" placeholder="http://...">
+                        <input class="service-form-text" name="website" type="url" placeholder="http://...">
                     </div>
                     
                     <input type="submit" class="submit-login" value="Ajouter">

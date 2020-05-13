@@ -14,6 +14,7 @@
     --FLAT_BLUE: #2C3E50;
     --CLEAR_BLUE: #3498DB;
     --BAD_RED: #E74C3C;
+    --NICE_GREEN: #4BAEA0;
 }
 
 /** STYLES */
@@ -21,11 +22,8 @@ body {
     margin: 0px;
     background-color: var(--BABY_POWDER);
     font-family: 'Palanquin Dark', sans-serif;
-    /* width: 100vw; */
-    /* height: 100vh; */
     min-width: 320px;
     min-height: 491px;
-    
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Ubuntu', sans-serif;
@@ -51,7 +49,7 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
+    /* width: 100vw; */
     position: relative;
     overflow-x: hidden;
 }
@@ -107,7 +105,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .main-container {
     display: flex;
-    width: 50%;
+    width: 100%;
     height: 100%;
 }
 .main-title {
@@ -177,7 +175,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .action-container {
-    width: 100%;
+    width: 60%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -199,6 +197,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--YALE_BLUE)
 }
 .action-label {
+    width: auto;
     border: 1px solid var(--CLEAR_BLUE);
     border-radius: 15px;
     padding: 0px 10px;
@@ -264,10 +263,41 @@ input[type=number]::-webkit-outer-spin-button {
     width: 4em;
     border: 1px solid var(--SLATE_GREY);
     border-radius: 4px;
-    /* -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; */
+    padding-left: 6px;
+}
+.service-form-checkbox {
+    outline: none;
+    width: 2vh;
+    height: 2vh;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--SNOW);
+    border: 1px solid var(--FLAT_BLUE);
+    border-radius: 2px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transition: transform .4s ease-out, border-radius .4s ease-out;
+}
+.service-form-checkbox:checked {
+    background-color: var(--FLAT_BLUE);
+    border-radius: 50%;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 .service-form-text:focus, .service-form-number:focus {
     border-color: var(--YALE_BLUE);
+}
+
+.service-form-result-false {
+    font-size: 22px;
+    font-weight: 200;
+    color: var(--SWEET_BROWN);
+}
+
+.service-form-result-true {
+    font-size: 22px;
+    font-weight: 200;
+    color: var(--NICE_GREEN);
 }

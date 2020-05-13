@@ -161,9 +161,82 @@ module.exports = {
     },
     createService: (req, res, next) => {
         try {
-            
+
+            processPhone = function(number) {
+                let correctPhoneNumber = number.trim().replace(/\s|\./g, "").replace("+33", "0")
+                return correctPhoneNumber;
+            }
+
+            var body = req.body;
+            const newObject = {
+                id: utils.createID(),
+                createdAt: new Date().toLocaleString(),
+                createdBy: JSON.parse(req.cookies.egenum).userName,
+                categories: body.categories,
+                name: body.nom,
+                contact: {
+                    mail: body.email,
+                    phone: processPhone(body.phone)
+                },
+                address: {
+                    number: body.numero,
+                    street: body.voie,
+                    city: body.ville,
+                    zip: body.codeP,
+                    coords: {
+                        lat: body.latitude,
+                        lng: body.longitude
+                    },
+                    hours: {
+                        monday: {
+                            isClosed: body.lundi_isClosed || false, 
+                            value: body.lundi_hours
+                        },
+                        tuesday: {
+                            isClosed: body.mardi_isClosed || false, 
+                            value: body.mardi_hours
+                        },
+                        wednesday: {
+                            isClosed: body.mercredi_isClosed || false, 
+                            value: body.mercredi_hours
+                        },
+                        thursday: {
+                            isClosed: body.jeudi_isClosed || false, 
+                            value: body.jeudi_hours
+                        },
+                        friday: {
+                            isClosed: body.vendredi_isClosed || false, 
+                            value: body.vendredi_hours
+                        },
+                        saturday: {
+                            isClosed: body.samedi_isClosed || false, 
+                            value: body.samedi_hours
+                        },
+                        sunday: {
+                            isClosed: body.dimanche_isClosed || false, 
+                            value: body.dimanche_hours
+                        }
+                    }
+                },
+                website: body.website
+            }
+
+            dbClient.put({
+                TableName: "egenum-services",
+                Item: newObject
+            }, (error, data) => {
+                if(error) {
+                    req.service_result = false
+                    next();
+                }
+                else {
+                    req.service_result = true
+                    next();
+                }
+            })
+
         } catch (error) {
-            next();
+            next(error);
         }
     },
     getAllServices: (req, res, next) => {

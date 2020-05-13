@@ -19,7 +19,7 @@ module.exports = (app) => {
         if(req.user_data.id !== undefined) {
             res.cookie("egenum", JSON.stringify(req.user_data), {
                 httpOnly: false,
-                maxAge: 86400000
+                maxAge: 21600000
             })
             res.redirect("/");
         }
@@ -49,7 +49,7 @@ module.exports = (app) => {
     })
     app.post("/create", controller.verifyCookie, controller.verifyUser, controller.createService, (req, res) => {
         res.render("create", {
-            userData: JSON.parse(req.cookies.egenum),
+            userData: req.cookies.egenum,
             result: req.service_result
         })
     })
