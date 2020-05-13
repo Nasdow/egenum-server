@@ -24,9 +24,9 @@ disableHours = function(day){
 }
 
 buildServiceCards = function(services) {
-    serviceItems = JSON.parse(services)
     var serviceContainer = document.getElementById("serviceListContainer");
 
+    serviceItems = JSON.parse(services).items;
     serviceItems.forEach((item)=> {
         var serviceItem = document.createElement("div");
         serviceItem.setAttribute("class", "service-item-container")
