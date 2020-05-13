@@ -58,7 +58,7 @@ module.exports = (app) => {
     app.get("/manage", controller.verifyCookie, controller.verifyUser, /*controller.getAllServices,*/ (req, res) => {
         res.render("manage", {
             userData: req.cookies.egenum,
-            services: '[{"website":"https://proprconsulting.com","categories":["NOURRITURE","VETEMENTS"],"contact":{"mail":"nassim.benelhadj@gmail.com","phone":"0659047087"},"createdAt":"2020-5-13 16:37:18","address":{"zip":"92160","number":"43","city":"ANTONY","street":"rue de Massy","coords":{"lng":"2.3","lat":"47.8"}},"hours":{"sunday":{"isClosed":false,"value":["14:00","19:00"]},"saturday":{"isClosed":false,"value":["12:00","16:00"]},"tuesday":{"isClosed":"true"},"wednesday":{"isClosed":"true"},"thursday":{"isClosed":"true"},"friday":{"isClosed":"true"},"monday":{"isClosed":"true"}},"id":"cb868dfe6bbddc199588616b5d5ef9e170f9eb4e","createdBy":"Super Admin","name":"Nassim-AIDES"}, {"website":"https://proprconsulting.com","categories":["NOURRITURE","VETEMENTS"],"contact":{"mail":"nassim.benelhadj@gmail.com","phone":"0659047087"},"createdAt":"2020-5-13 16:37:18","address":{"zip":"92160","number":"43","hours":{"sunday":{"isClosed":false,"value":["14:00","19:00"]},"saturday":{"isClosed":false,"value":["12:00","16:00"]},"tuesday":{"isClosed":"true"},"wednesday":{"isClosed":"true"},"thursday":{"isClosed":"true"},"friday":{"isClosed":"true"},"monday":{"isClosed":"true"}},"city":"ANTONY","street":"rue de Massy","coords":{"lng":"2.3","lat":"47.8"}},"id":"2","createdBy":"Super Admin","name":"Nassim-AIDES"}]',//JSON.stringify(req.service_data),
+            services: JSON.stringify(req.service_data),
             error: req.service_error
         })
     })
