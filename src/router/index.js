@@ -55,10 +55,11 @@ module.exports = (app) => {
     })
 
     /** Visualisation des données */
-    app.get("/manage", controller.verifyCookie, controller.verifyUser, /*controller.getAllServices,*/ (req, res) => {
+    app.get("/manage", controller.verifyCookie, controller.verifyUser, controller.getAllServices, (req, res) => {
+        console.log("REQ: ", req.service_data)
         res.render("manage", {
             userData: req.cookies.egenum,
-            services: JSON.stringify(req.service_data),
+            services: req.service_data,
             error: req.service_error
         })
     })
