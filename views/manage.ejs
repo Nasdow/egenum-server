@@ -1,7 +1,40 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <pre>
-            <%= JSON.stringify(services) %>
-        </pre>
+    <head>
+        <title>Egenum</title>
+        <link rel="icon" type="image/png" href="/images/favicon.ico">
+        <meta charset="utf-8">
+        <meta name="description" content="Egenum | Trouvez l'aide autours de vous">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link type="text/css" rel="stylesheet" href="style.css">
+    </head>
+    <body onload="buildServiceCards('<%= services %>'); feather.replace();">
+        <header id="header" class="header">
+            <a class="main-title-link" href="/">
+                <h1 class="main-title">Egenum</h1>
+            </a>
+            <div class="header-user-container">
+                <i class="header-user-icon" data-feather="user"></i>
+                <p id="userName" class="header-user-name"><%= JSON.parse(userData).userName %></p>
+                <ul class="header-logout">
+                    <li class="header-logout-item">
+                        <a href="/" onclick="logout()">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="root-container">
+            <div class="main-container flex-centered">
+                <h2>Liste des services</h2>
+                <% if(Object.keys(services).length === 0) { %>
+                    <p>Aucun services</p>
+                <% } else { %>
+                    <div id="serviceListContainer" class="services-list"></div>
+                <% } %>
+            </div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>

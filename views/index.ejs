@@ -3,10 +3,12 @@
     <head>
         <title>Egenum</title>
         <link rel="icon" type="image/png" href="/images/favicon.ico">
+        <meta charset="utf-8">
         <meta name="description" content="Egenum | Trouvez l'aide autours de vous">
-        <link rel="stylesheet" href="style.css" />
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link type="text/css" rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body onload="feather.replace();">
         <header id="header" class="header">
             <a class="main-title-link" href="/">
                 <h1 class="main-title">Egenum</h1>
@@ -46,9 +48,6 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script>
-            feather.replace()
-        </script>
         <script src="script.js"></script>
     </body>
 </html>

@@ -187,35 +187,35 @@ module.exports = {
                         lat: body.latitude,
                         lng: body.longitude
                     },
-                    hours: {
-                        monday: {
-                            isClosed: body.lundi_isClosed || false, 
-                            value: body.lundi_hours
-                        },
-                        tuesday: {
-                            isClosed: body.mardi_isClosed || false, 
-                            value: body.mardi_hours
-                        },
-                        wednesday: {
-                            isClosed: body.mercredi_isClosed || false, 
-                            value: body.mercredi_hours
-                        },
-                        thursday: {
-                            isClosed: body.jeudi_isClosed || false, 
-                            value: body.jeudi_hours
-                        },
-                        friday: {
-                            isClosed: body.vendredi_isClosed || false, 
-                            value: body.vendredi_hours
-                        },
-                        saturday: {
-                            isClosed: body.samedi_isClosed || false, 
-                            value: body.samedi_hours
-                        },
-                        sunday: {
-                            isClosed: body.dimanche_isClosed || false, 
-                            value: body.dimanche_hours
-                        }
+                },
+                hours: {
+                    monday: {
+                        isClosed: body.lundi_isClosed || false, 
+                        value: body.lundi_hours
+                    },
+                    tuesday: {
+                        isClosed: body.mardi_isClosed || false, 
+                        value: body.mardi_hours
+                    },
+                    wednesday: {
+                        isClosed: body.mercredi_isClosed || false, 
+                        value: body.mercredi_hours
+                    },
+                    thursday: {
+                        isClosed: body.jeudi_isClosed || false, 
+                        value: body.jeudi_hours
+                    },
+                    friday: {
+                        isClosed: body.vendredi_isClosed || false, 
+                        value: body.vendredi_hours
+                    },
+                    saturday: {
+                        isClosed: body.samedi_isClosed || false, 
+                        value: body.samedi_hours
+                    },
+                    sunday: {
+                        isClosed: body.dimanche_isClosed || false, 
+                        value: body.dimanche_hours
                     }
                 },
                 website: body.website
@@ -286,6 +286,30 @@ module.exports = {
                 }
             };
             next();
+        }
+    },
+    removeService: (req, res, next) => {
+        try {
+            dbClient.delete({
+                TableName: "egenum-services",
+                Key: {
+                    id: req.params.id
+                }
+            }, (error, data) => {
+                if(error) {
+                    console.log("Error on DELETE service");
+                    res.status(500).json({
+                        status: 500
+                    })
+                }
+                else {
+                    res.status(200).json({
+                        status: 200
+                    })
+                }
+            })
+        } catch (error) {
+            next(error)
         }
     }
 

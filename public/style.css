@@ -1,5 +1,5 @@
 /** FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;600&family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&family=Ubuntu:wght@400;700&display=swap');
 
 /** COLORS */
 :root {
@@ -21,7 +21,7 @@
 body {
     margin: 0px;
     background-color: var(--BABY_POWDER);
-    font-family: 'Palanquin Dark', sans-serif;
+    font-family: 'Rubik', sans-serif;
     min-width: 320px;
     min-height: 491px;
 }
@@ -248,9 +248,8 @@ input[type=number]::-webkit-outer-spin-button {
     font-weight: 200;
     /* margin-right: 0.5em; */
 }
-.service-form input, .service-form select {
-    margin-left: 8px;
-    margin-right: 8px;
+.service-form input {
+    margin: 8px;
 }
 .service-form-text {
     outline: 0px;
@@ -300,4 +299,81 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 22px;
     font-weight: 200;
     color: var(--NICE_GREEN);
+}
+
+.services-list {
+    width: 30%;
+}
+.service-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+.service-item-part {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.service-item-title-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.service-item-title {
+    font-weight: 600;
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+    vertical-align: middle;
+}
+.service-item-arrow-down {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    color: var(--RICH_BLACK);
+    transition: transform .5s linear;
+}
+.service-item-arrow-up {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    transition: transform .5s linear;
+}
+.service-item-content {
+    font-weight: 300;
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+}
+.service-item-show {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.4s ease-in, height 0.4s ease-in;
+    max-height: 1000;
+    opacity: 1;
+}
+.service-item-hidden {
+    visibility: hidden;
+    width: 100%;
+    height: 0;
+    max-height: 0;
+    opacity: 0;
+}
+.trashButton {
+    outline: none;
+    border: 1px solid var(--BAD_RED);
+    border-radius: 33%;
+    padding: 5px;
+    margin-top: 10px;
+    color: var(--BAD_RED);
+    background-color: var(--SNOW);
+    transition: background-color .5s ease-out;
+}
+.trashButton:hover {
+    color: var(--SNOW);
+    border: 1px solid var(--BAD_RED);
+    background-color: var(--BAD_RED);
 }
