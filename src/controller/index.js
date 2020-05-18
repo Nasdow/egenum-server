@@ -1,16 +1,14 @@
-require('dotenv').config();
 const utils = require("../utils");
 const AWS = require("aws-sdk");
 
 const awsConfig = {
     region: process.env.AWS_DYNAMO_REGION,
-    endpoint: process.env.AWS_DYNAMO_ENDPOINT,
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 }
 AWS.config.update(awsConfig);
 
-const dbClient = new AWS.DynamoDB.DocumentClient();
+const dbClient = new AWS.DynamoDB.DocumentClient({endpoint: process.env.AWS_DYNAMO_ENDPOINT});
 
 module.exports = {
     handleErrors: (error, req, res, next) => {
