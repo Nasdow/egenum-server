@@ -70,11 +70,11 @@ module.exports = {
             })
         }
     },
-    verifyUserBeta: (req, res, next) => {
+    verifyUserBeta: async (req, res, next) => {
         try {
             const userID = JSON.parse(req.cookies.egenum).id
             try {
-                data = await dbClient.get({
+                var data = await dbClient.get({
                     TableName: 'egenum-users',
                     Key: {
                         id: userID
