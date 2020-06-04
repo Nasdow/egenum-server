@@ -130,7 +130,7 @@ input[type=number]::-webkit-outer-spin-button {
     align-self: center;
 }
 .input-login-row {
-    /* width: 50%; */
+    margin: 15px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -138,9 +138,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .icons-login {
     color: var(--YALE_BLUE);
-    width: 1em;
-    height: 1em;
-
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 8px;
 }
 .input-login {
     outline: 0px;

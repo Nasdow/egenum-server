@@ -31,72 +31,24 @@ module.exports = {
             res.redirect("/login")
         }
     },
-    verifyUser: (req, res, next) => {
+    verifyUser: async (req, res, next) => {
         try {
             const userID = JSON.parse(req.cookies.egenum).id
-            dbClient.get({
+            var data = await dbClient.get({
                 TableName: 'egenum-users',
                 Key: {
                     id: userID
                 }
-            }, (error, data) => {
-                if(error) {
-                    console.log("Error while getting user in DB :", error);
-                    res.status(500).json({
-                        status: 500,
-                        statusStr: "Internal Server Error",
-                        msg: "Impossible de vérifier l'émetteur de la requête"
-                    })
-                }
-                else {
-                    if(data.Item) {
-                        next();
-                    }
-                    else {
-                        res.status(401).json({
-                            status: 401,
-                            statusStr: "Unauthorized",
-                            msg: "Vous devez être connecté pour effectuer cette opération"
-                        })
-                    }
-                }
-            })
-        } catch (error) {
-            console.log("Error while verifying user:", error);
-            res.status(500).json({
-                status: 500,
-                statusStr: "Internal Server Error",
-                msg: "Impossible de vérifier l'émetteur de la requête"
-            })
-        }
-    },
-    verifyUserBeta: async (req, res, next) => {
-        try {
-            const userID = JSON.parse(req.cookies.egenum).id
-            try {
-                var data = await dbClient.get({
-                    TableName: 'egenum-users',
-                    Key: {
-                        id: userID
-                    }
-                }).promise()
-                console.log("DATA : ", data)
-                if(data.Item) {
-                    next();
-                }
-                else {
-                    res.status(401).json({
-                        status: 401,
-                        statusStr: "Unauthorized",
-                        msg: "Vous devez être connecté pour effectuer cette opération"
-                    })
-                }
-            } catch (error) {
-                console.log("Error while getting user in DB :", error);
-                res.status(500).json({
-                    status: 500,
-                    statusStr: "Internal Server Error",
-                    msg: "Impossible de vérifier l'émetteur de la requête"
+            }).promise()
+
+            if(data.Item) {
+                next();
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    statusStr: "Unauthorized",
+                    msg: "Vous devez être connecté pour effectuer cette opération"
                 })
             }
 
@@ -348,57 +300,57 @@ module.exports = {
         } catch (error) {
             next(error)
         }
-    }
+    },
 
     /*********************/
     /**SUPER ADMIN Only */
-    /** createUser: (req, res, next) => {
+    // createUser: (req, res, next) => {
 
-        dbClient.scan({
-            TableName: 'egenum-users',
-            FilterExpression: "username= :username",
-            ExpressionAttributeValues: {
-                ":username": req.body.userName
-            }
-        }, (error, data) => {
-            if(error) {
-                next(error);
-            }
-            else {
-                // console.log("Data:", data)
-                if(data.Count !== 0) {
-                    res.status(403).json({
-                        status: 403,
-                        statusStr: "FORBIDDEN",
-                        msg: "L'utilisateur " + req.body.userName + " existe déjà !"
-                    })
-                }
-                else {
-                    const newUser = {
-                        id: utils.createID(),
-                        username: req.body.userName,
-                        password: utils.hashPassword(req.body.password)
-                    }
+    //     dbClient.scan({
+    //         TableName: 'egenum-users',
+    //         FilterExpression: "username= :username",
+    //         ExpressionAttributeValues: {
+    //             ":username": req.body.userName
+    //         }
+    //     }, (error, data) => {
+    //         if(error) {
+    //             next(error);
+    //         }
+    //         else {
+    //             // console.log("Data:", data)
+    //             if(data.Count !== 0) {
+    //                 res.status(403).json({
+    //                     status: 403,
+    //                     statusStr: "FORBIDDEN",
+    //                     msg: "L'utilisateur " + req.body.userName + " existe déjà !"
+    //                 })
+    //             }
+    //             else {
+    //                 const newUser = {
+    //                     id: utils.createID(),
+    //                     username: req.body.userName,
+    //                     password: utils.hashPassword(req.body.password)
+    //                 }
 
-                    dbClient.put({
-                        TableName: 'egenum-users',
-                        Item: newUser
-                    }, (error, data) => {
-                        if(error) {
-                            console.log("CANNOT CREATE NEW USER")
-                            next(error)
-                        }
-                        else {
-                            //Success
-                            res.status(200).json({
-                                status: 200,
-                                statusStr: "OK",
-                                msg: "L'utilisateur " + newUser.username + " a créé avec succes",
-                            })
-                        }
-                    })
-                }
-            }
-        })
-    }*/
+    //                 dbClient.put({
+    //                     TableName: 'egenum-users',
+    //                     Item: newUser
+    //                 }, (error, data) => {
+    //                     if(error) {
+    //                         console.log("CANNOT CREATE NEW USER")
+    //                         next(error)
+    //                     }
+    //                     else {
+    //                         //Success
+    //                         res.status(200).json({
+    //                             status: 200,
+    //                             statusStr: "OK",
+    //                             msg: "L'utilisateur " + newUser.username + " a créé avec succes",
+    //                         })
+    //                     }
+    //                 })
+    //             }
+    //         }
+    //     })
+    // }
 }
