@@ -70,6 +70,45 @@ module.exports = {
             })
         }
     },
+    verifyUserBeta: (req, res, next) => {
+        try {
+            const userID = JSON.parse(req.cookies.egenum).id
+            try {
+                data = await dbClient.get({
+                    TableName: 'egenum-users',
+                    Key: {
+                        id: userID
+                    }
+                }).promise()
+                console.log("DATA : ", data)
+                if(data.Item) {
+                    next();
+                }
+                else {
+                    res.status(401).json({
+                        status: 401,
+                        statusStr: "Unauthorized",
+                        msg: "Vous devez être connecté pour effectuer cette opération"
+                    })
+                }
+            } catch (error) {
+                console.log("Error while getting user in DB :", error);
+                res.status(500).json({
+                    status: 500,
+                    statusStr: "Internal Server Error",
+                    msg: "Impossible de vérifier l'émetteur de la requête"
+                })
+            }
+
+        } catch (error) {
+            console.log("Error while verifying user:", error);
+            res.status(500).json({
+                status: 500,
+                statusStr: "Internal Server Error",
+                msg: "Impossible de vérifier l'émetteur de la requête"
+            })
+        }
+    },
     authenticate: (req, res, next) => {
         try {
             dbClient.scan({

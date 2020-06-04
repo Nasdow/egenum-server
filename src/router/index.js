@@ -41,7 +41,7 @@ module.exports = (app) => {
     })
 
     /** Création des données */
-    app.get("/create", controller.verifyCookie, controller.verifyUser, (req, res) => {
+    app.get("/create", controller.verifyCookie, controller.verifyUserBeta, (req, res) => {
         res.render("create", {
             userData: req.cookies.egenum,
             result: undefined
